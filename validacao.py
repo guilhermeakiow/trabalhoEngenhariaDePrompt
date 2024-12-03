@@ -12,8 +12,6 @@ class Prato(BaseModel):
     prato: str = Field(description="Nome do prato recomendado")
 
 
-
-
 # prompt modificado para pedir uma recomendação e prato culinário
 prompt = """
     Eu gosto de: pizza, churrasco, shushi,
@@ -25,10 +23,7 @@ guard = Guard.for_pydantic(output_class=Prato)
 
 # Simulação de interação com o modelo de IA
 res = guard(
-    model="gpt-4o-mini-2024-07-18",
-    message=[{"role": "user", 
-              "content": prompt
-    }]
+    model="gpt-4o-mini-2024-07-18", message=[{"role": "user", "content": prompt}]
 )
 
 # Exibindo a saida validada

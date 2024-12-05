@@ -1,17 +1,15 @@
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 from guardrails import Guard
-#from guardrails_api_client import Guard
 
 # Carregando variáveis de ambiente, se necessário
 load_dotenv()
 
-
 # Definição do modelo
 class Analista(BaseModel):
-    Vitórias: str = Field(description="Pesquise na Web e informe em um pequeno parágrafo quantas vitórias o atlético mineiro teve em 2024")
-    Gols: str = Field(description="Pesquise na Web e informe quantos gols o jogador hulk do atlético mineiro fez em 2024")
-
+    CopaDoMundo: str = Field(description="Quem venceu a última Copa do Mundo?")
+    SeleçãoArgentinaDeFutebol: str = Field(description="Pesquise na Web e destaque em um pequeno parágrafo quais os pontos fortes e fracos do time: Seleção Argentina de Futebol")
+    SeleçãoBrasileiraDeFutebol: str = Field(description="Pesquise na Web e destaque em um pequeno parágrafo quais os pontos fortes e fracos do time: Seleção Brasileira de Futebol")
 
 # prompt modificado para pedir uma análise de futebol
 prompt = """
@@ -27,4 +25,4 @@ res = guard(model="gpt-4o-mini", messages=[{"role": "user", "content":prompt}]
 )
 
 # Exibindo a saida validada
-print(f"Recomendação do analista: {res.validated_output}")
+print(f"Análise técnica: {res.validated_output}")

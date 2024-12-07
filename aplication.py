@@ -9,7 +9,7 @@ import re
 load_dotenv()
 
 
-# Definição do modelo usando pydantic que serve para validar e estruturar os dados.
+# Definição do modelo usando pydantic para validar e estruturar os dados.
 class Analista(BaseModel):
     Carro: str = Field(description="Quais modelos de carros mais roubados em 2024?")
     Gênero: str = Field(
@@ -65,9 +65,7 @@ def extrair_palavras_chave(texto):
     palavras_significativas = [
         palavra for palavra in palavras if palavra not in stop_words
     ]
-    return Counter(palavras_significativas).most_common(
-        50
-    )  # Retorna as 50 palavras mais frequentes
+    return Counter(palavras_significativas).most_common(50)
 
 
 try:
@@ -101,11 +99,11 @@ try:
         )
 
         # Gera palavras-chave
-        palavras_chave = [
-            palavra for palavra, _ in extrair_palavras_chave(texto_completo)
-        ]
+        palavras_chave = extrair_palavras_chave(texto_completo)
+        palavras_chave_lista = [palavra for palavra, _ in palavras_chave]
         print("📌 Palavras-chave Extraídas do Contexto:")
-        print(", ".join(palavras_chave))
+        print(", ".join(palavras_chave_lista))
+        print(f"🔢 Total de Palavras Extraídas: {len(palavras_chave_lista)}")
         print("=" * 50)
 
         # Loop contínuo para capturar entrada do usuário
@@ -120,23 +118,23 @@ try:
                 break
 
             # Gera palavras do usuário
-            palavras_usuario = [
-                palavra for palavra, _ in extrair_palavras_chave(user_input)
-            ]
+            palavras_usuario = extrair_palavras_chave(user_input)
+            palavras_usuario_lista = [palavra for palavra, _ in palavras_usuario]
 
             # Calcula palavras comuns
-            palavras_comuns = set(palavras_chave) & set(palavras_usuario)
+            palavras_comuns = set(palavras_chave_lista) & set(palavras_usuario_lista)
 
             # Calcula porcentagem de veracidade
-            if len(palavras_chave) > 0:
+            if len(palavras_chave_lista) > 0:
                 porcentagem_veracidade = (
-                    len(palavras_comuns) / len(palavras_chave)
+                    len(palavras_comuns) / len(palavras_chave_lista)
                 ) * 100
             else:
                 porcentagem_veracidade = 0
 
             print("\n✅ Palavras em Comum:")
             print(", ".join(palavras_comuns))
+            print(f"🔢 Total de Palavras em Comum: {len(palavras_comuns)}")
             print("\n📊 Porcentagem de Veracidade:")
             print(f"   {porcentagem_veracidade:.2f}%")
 

@@ -74,8 +74,21 @@ try:
     res = guard(model="gpt-4o-mini", messages=[{"role": "user", "content": prompt}])
 
     if res.validated_output:
-        print("Resultado gerado pelo modelo:")
-        print(res.validated_output)
+        print("=" * 50)
+        print("📋 Resultado Gerado pelo Modelo")
+        print("=" * 50)
+
+        # Exibição formatada dos resultados
+        print("\n🔹 Modelos de Carros Mais Roubados:")
+        print(f"   {res.validated_output['Carro']}\n")
+
+        print("🔹 Gênero Mais Afetado:")
+        print(f"   {res.validated_output['Gênero']}\n")
+
+        print("🔹 História do Roubo:")
+        print(f"   {res.validated_output['História']}\n")
+
+        print("=" * 50)
 
         # Combina textos dos campos para gerar palavras-chave
         texto_completo = (
@@ -90,17 +103,19 @@ try:
         palavras_chave = [
             palavra for palavra, _ in extrair_palavras_chave(texto_completo)
         ]
-        print("Palavras-chave extraídas do contexto:", palavras_chave)
+        print("📌 Palavras-chave Extraídas do Contexto:")
+        print(", ".join(palavras_chave))
+        print("=" * 50)
 
         # Loop contínuo para capturar entrada do usuário
         while True:
             user_input = input(
-                "Por favor, insira o relato da testemunha ou digite 'sair' para encerrar: "
+                "\n✏️ Por favor, insira o relato da testemunha ou digite 'sair' para encerrar: "
             )
 
             # Verifica se o usuário deseja sair
             if user_input.strip().lower() == "sair":
-                print("Encerrando o programa. Obrigado!")
+                print("🛑 Encerrando o programa. Obrigado!")
                 break
 
             # Gera palavras do usuário
@@ -119,19 +134,21 @@ try:
             else:
                 porcentagem_veracidade = 0
 
-            print(f"Palavras em comum: {palavras_comuns}")
-            print(f"Porcentagem de veracidade: {porcentagem_veracidade:.2f}%")
+            print("\n✅ Palavras em Comum:")
+            print(", ".join(palavras_comuns))
+            print("\n📊 Porcentagem de Veracidade:")
+            print(f"   {porcentagem_veracidade:.2f}%")
 
             if porcentagem_veracidade < 30:
                 print(
-                    "O assunto informado pelo testemunha não está relacionado ao contexto da vítima."
+                    "❌ O assunto informado pelo testemunha não está relacionado ao contexto da vítima."
                 )
             else:
                 print(
-                    "Texto válido! O relato da testemunha está relacionado ao assunto gerado."
+                    "✔️ Texto válido! O relato da testemunha está relacionado ao assunto gerado."
                 )
     else:
-        print("Os dados retornados não são válidos.")
+        print("⚠️ Os dados retornados não são válidos.")
 
 except Exception as e:
-    print(f"Você está no bloco Except: {e}")
+    print(f"⚠️ Você está no bloco Except: {e}")

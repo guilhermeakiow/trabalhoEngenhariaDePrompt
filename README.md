@@ -5,13 +5,13 @@ OITIVA INTELIGENTE ::
 Solução Baseada em PLN para Análise e Verificação de Relatos de Roubo de Veículos
 
 SOLUÇÃO ::
-Analisa se os relatos fornecidos por testemunhas têm
-relação direta com os contextos de roubo de veículos
-gerados pelo modelo. Isso é feito ao comparar palavras-
-chave dos relatos com as do cenário gerado.
+Análise de relatos fornecidos por testemunhas em
+relação direta com os contextos de roubo de veículos. 
+Isso é feito ao comparar palavras-
+chave dos relatos com as do cenário real.
 Automatiza a análise textual de situações de roubo,
 destacando palavras-chave relevantes e
-comparando-as com o contexto gerado previamente,
+comparando-as com o contexto,
 economizando tempo de análise manual.
 Ajuda a identificar inconsistências em relatos de
 testemunhas, calculando a "porcentagem de
